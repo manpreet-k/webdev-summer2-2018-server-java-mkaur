@@ -60,4 +60,17 @@ public class UserService {
 		user.setId(userId);
 		return userRepository.save(user);
 	}
+	
+	@PostMapping("/api/register")
+	public User register(@RequestBody User user) {
+		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
+		if (userRecord == null || userRecord.size() == 0) {
+			return userRepository.save(user);
+		}
+		return new User();
+	}
+	
+	public Iterable<User> findUserByUsername(@RequestParam(name = "username") String username) {
+		return userRepository.findUserByUsername(username);
+	}
 }
