@@ -69,7 +69,7 @@
 					.closest('tr')
 					.attr('id');
     	
-    	userService.deleteUser(id);
+    	userService.deleteUser(id, reloadCallback);
     }
     
     function updateUser() {

@@ -54,6 +54,11 @@ function UserService() {
 	}
 
 	function deleteUser(userId, callback) {
-		
+		return fetch(self.userUrl + '/' + userId, {
+			method : 'delete',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).then(callback);
 	}
 }
