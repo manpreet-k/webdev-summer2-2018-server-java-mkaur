@@ -52,16 +52,18 @@
     	var id = $(this)
     				.closest('tr')
     				.attr('id');
-    	var user = userService.findUserById(id);
     	updateId = id;
-    	
+    	userService.findUserById(id, findUserByIdData);
+    }
+    
+    function findUserByIdData(user) {    	
     	$usernameFld
-    		.val(user.getUsername)
+    		.val(user.username)
     		.attr("disabled", true);
-		$passwordFld.val(user.getPassword);
-		$firstNameFld.val(user.getFirstName);	
-		$lastNameFld.val(user.getLastName);	
-		$roleFld.val(user.getRole);	
+		$passwordFld.val(user.password);
+		$firstNameFld.val(user.firstName);	
+		$lastNameFld.val(user.lastName);	
+		$roleFld.val(user.role);	
     }
     
     function deleteUser() {    	    	

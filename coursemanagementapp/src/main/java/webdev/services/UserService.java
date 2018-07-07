@@ -48,4 +48,9 @@ public class UserService {
 	public void deleteUser(@PathVariable Integer userId) {
 		userRepository.deleteById(userId);
 	}
+	
+	@GetMapping("/api/user/{userId}")
+	public Optional<User> findById(@PathVariable Integer userId) {
+		return userRepository.findById(userId);
+	}
 }

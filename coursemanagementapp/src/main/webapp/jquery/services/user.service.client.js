@@ -37,16 +37,29 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			}
-		}).then(function(response) {
+		})
+		.then(function(response) {
 			return response.json();
-		}).then(function(data) {
+		})
+		.then(function(data) {
 			callback(data);
 		});
 
 	}
 
 	function findUserById(userId, callback) {
-
+		return fetch(self.userUrl + '/' + userId, {
+			method : 'get',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			callback(data);
+		});
 	}
 
 	function updateUser(userId, user, callback) {
