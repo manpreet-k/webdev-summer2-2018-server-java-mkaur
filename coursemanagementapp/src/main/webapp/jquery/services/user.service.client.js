@@ -6,9 +6,13 @@ function UserService() {
 	this.deleteUser = deleteUser;
 	this.updateUser = updateUser;
 	this.register = register;
+	this.updateProfile = updateProfile;
+	this.logout = logout;
 	this.loginUrl = '/api/login'
 	this.userUrl = '/api/user';
 	this.registerUrl = '/api/register';
+	this.profileUrl = '/api/profile';
+	this.logoutUrl = '/api/logout';
 	var self = this;
 
 	function login(user) {
@@ -39,11 +43,9 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			}
-		})
-		.then(function(response) {
+		}).then(function(response) {
 			return response.json();
-		})
-		.then(function(data) {
+		}).then(function(data) {
 			callback(data);
 		});
 
@@ -55,11 +57,9 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			}
-		})
-		.then(function(response) {
+		}).then(function(response) {
 			return response.json();
-		})
-		.then(function(data) {
+		}).then(function(data) {
 			callback(data);
 		});
 	}
@@ -72,11 +72,9 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			},
 			body : userObjStr
-		})
-		.then(function(response) {
+		}).then(function(response) {
 			return response.json();
-		})
-		.then(function(data) {
+		}).then(function(data) {
 			callback(data);
 		});
 	}
@@ -89,7 +87,7 @@ function UserService() {
 			}
 		}).then(callback);
 	}
-	
+
 	function register(user, callback) {
 		var userObjStr = JSON.stringify(user);
 		return fetch(self.registerUrl, {
@@ -98,11 +96,37 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			},
 			body : userObjStr
-		})
-		.then(function(response) {
+		}).then(function(response) {
 			return response.json();
-		})
-		.then(function(data) {
+		}).then(function(data) {
+			callback(data);
+		});
+	}
+
+	function updateProfile(user, callback) {
+		var userObjStr = JSON.stringify(user);
+		return fetch(self.profileUrl, {
+			method : 'put',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : userObjStr
+		}).then(function(response) {
+			return response.json();
+		}).then(function(data) {
+			callback(data);
+		});
+	}
+
+	function logout(callback) {
+		return fetch(self.logoutUrl, {
+			method : 'post',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(data) {
 			callback(data);
 		});
 	}
