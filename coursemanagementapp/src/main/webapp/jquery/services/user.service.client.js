@@ -5,8 +5,10 @@ function UserService() {
 	this.findUserById = findUserById;
 	this.deleteUser = deleteUser;
 	this.updateUser = updateUser;
+	this.register = register;
 	this.loginUrl = '/api/login'
 	this.userUrl = '/api/user';
+	this.registerUrl = '/api/register';
 	var self = this;
 
 	function login(user) {
@@ -86,5 +88,22 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			}
 		}).then(callback);
+	}
+	
+	function register(user, callback) {
+		var userObjStr = JSON.stringify(user);
+		return fetch(self.registerUrl, {
+			method : 'post',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : userObjStr
+		})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			callback(data);
+		});
 	}
 }
