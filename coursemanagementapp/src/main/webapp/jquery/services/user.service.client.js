@@ -63,7 +63,20 @@ function UserService() {
 	}
 
 	function updateUser(userId, user, callback) {
-
+		var userObjStr = JSON.stringify(user);
+		return fetch(self.userUrl + '/' + userId, {
+			method : 'put',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			body : userObjStr
+		})
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(data) {
+			callback(data);
+		});
 	}
 
 	function deleteUser(userId, callback) {

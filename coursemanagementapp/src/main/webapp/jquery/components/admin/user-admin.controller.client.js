@@ -70,7 +70,7 @@
     	var id = $(this)
 					.closest('tr')
 					.attr('id');
-    	
+    	updateId = id;
     	userService.deleteUser(id, reloadCallback);
     }
     
@@ -83,7 +83,7 @@
     	
     	var user = new User(usernameStr, passwordStr, firstNameStr, lastNameStr, "", "", roleStr, "");
     	
-    	userService.updateUser(updateId, user);
+    	userService.updateUser(updateId, user, reloadCallback);
     }
     
     function renderUser(user) {
