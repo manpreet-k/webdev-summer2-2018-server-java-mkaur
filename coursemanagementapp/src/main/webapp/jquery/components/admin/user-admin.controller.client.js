@@ -52,24 +52,26 @@
     	var id = $(this)
     				.closest('tr')
     				.attr('id');
-    	var user = userService.findUserById(id);
     	updateId = id;
-    	
+    	userService.findUserById(id, findUserByIdData);
+    }
+    
+    function findUserByIdData(user) {    	
     	$usernameFld
-    		.val(user.getUsername)
+    		.val(user.username)
     		.attr("disabled", true);
-		$passwordFld.val(user.getPassword);
-		$firstNameFld.val(user.getFirstName);	
-		$lastNameFld.val(user.getLastName);	
-		$roleFld.val(user.getRole);	
+		$passwordFld.val(user.password);
+		$firstNameFld.val(user.firstName);	
+		$lastNameFld.val(user.lastName);	
+		$roleFld.val(user.role);	
     }
     
     function deleteUser() {    	    	
     	var id = $(this)
 					.closest('tr')
 					.attr('id');
-    	
-    	userService.deleteUser(id);
+    	updateId = id;
+    	userService.deleteUser(id, reloadCallback);
     }
     
     function updateUser() {
@@ -81,7 +83,7 @@
     	
     	var user = new User(usernameStr, passwordStr, firstNameStr, lastNameStr, "", "", roleStr, "");
     	
-    	userService.updateUser(updateId, user);
+    	userService.updateUser(updateId, user, reloadCallback);
     }
     
     function renderUser(user) {
