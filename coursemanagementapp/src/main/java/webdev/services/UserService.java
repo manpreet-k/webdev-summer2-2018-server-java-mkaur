@@ -73,4 +73,19 @@ public class UserService {
 	public Iterable<User> findUserByUsername(@RequestParam(name = "username") String username) {
 		return userRepository.findUserByUsername(username);
 	}
+	
+	@PutMapping("/api/profile")
+	public User updateProfile(@RequestBody User user) {
+		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
+		if (userRecord != null && userRecord.size() > 0) {
+			user.setId(userRecord.get(0).getId());
+			return userRepository.save(user);
+		}
+		return new User();
+	}
+	
+	@PostMapping("/api/logout")
+	public void logout() {
+		
+	}
 }
