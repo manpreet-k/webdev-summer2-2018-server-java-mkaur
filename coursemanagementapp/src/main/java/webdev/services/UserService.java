@@ -35,4 +35,9 @@ public class UserService {
 		}
 		return new User();
 	}
+	
+	@PostMapping("/api/user")
+	public User createUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
 }
