@@ -18,61 +18,70 @@
 	<div class="container">
 		<h1>Profile</h1>
 		<form>
+			<div>
+				<div class="msg_success col-sm-10">
+					<i class="fa fa-check"></i> Profile updated successfully!
+				</div>
+				<div class="msg_error col-sm-10">
+					<i class="fa fa-times-circle"></i> Profile update failed!
+				</div>
+			</div>
 			<div class="form-group row">
-				<label for="username" class="col-sm-2 col-form-label">
-					Username 
-				</label>
+				<div class="col-sm-10">
+					<label for="username"> Username </label>
+				</div>
 				<div class="col-sm-10">
 					<input class="form-control" id="username" placeholder="Alice">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="phone" class="col-sm-2 col-form-label">
-					Phone 
-				</label>
+				<div class="col-sm-10">
+					<label for="phone"> Phone </label>
+				</div>
 				<div class="col-sm-10">
 					<input class="form-control" id="phone" placeholder="(555) 123-4324">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="email" class="col-sm-2 col-form-label">
-					Email 
-				</label>
 				<div class="col-sm-10">
-					<input class="form-control" id="email" placeholder="alice@wonderland.com">
+					<label for="email"> Email </label>
+				</div>
+				<div class="col-sm-10">
+					<input class="form-control" id="email"
+						placeholder="alice@wonderland.com">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="role" class="col-sm-2 col-form-label">
-					Role 
-				</label>
+				<div class="col-sm-10">
+					<label for="role"> Role </label>
+				</div>
 				<div class="col-sm-10">
 					<select id="role" class="form-control">
 						<option value="FACULTY">Faculty</option>
 						<option value="STUDENT">Student</option>
 						<option value="ADMIN">Admin</option>
-				</select>
+					</select>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="dob" class="col-sm-2 col-form-label">
-					Date of birth 
-				</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control wbdv-password-fld"
-						id="dob" >
+					<label for="dob"> Date of birth </label>
+				</div>
+				<div class="col-sm-10">
+					<input type="date" class="form-control wbdv-password-fld" id="dob">
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-10">
-					<button id = "updateBtn" class="btn btn-success btn-block">Update</button>
+					<label></label>
+				</div>
+				<div class="col-sm-10">
+					<button id="updateBtn" class="btn btn-success btn-block">Update</button>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-10">
-					<button id = "logoutBtn" class="btn btn-danger btn-block">Logout</button>
+					<button id="logoutBtn" class="btn btn-danger btn-block">Logout</button>
 				</div>
 			</div>
 		</form>

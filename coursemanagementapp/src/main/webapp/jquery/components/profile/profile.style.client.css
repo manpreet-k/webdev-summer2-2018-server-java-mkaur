@@ -1,0 +1,24 @@
+.msg_error {
+	color: red;
+	background-color: #FFD2D2;
+}
+
+.msg_success i, .msg_error i {
+	margin: 5px 5px;
+	vertical-align: middle;
+}
+
+.msg_success, .msg_error {
+	margin: 5px 0px;
+	padding: 5px;
+}
+
+.msg_success {
+	color: green;
+	background-color: #DFF2BF;
+}
+
+.msg_success i, .msg_error i {
+	margin: 5px 5px;
+	vertical-align: middle;
+}
