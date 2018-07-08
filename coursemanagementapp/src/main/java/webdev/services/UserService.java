@@ -36,8 +36,6 @@ public class UserService {
 				user.getPassword());
 		if (userRecord != null && userRecord.size() > 0) {
 			session.setAttribute(CURRENT_USER, user);
-			User newuser = (User) session.getAttribute(CURRENT_USER);
-			System.out.println("*****************" + newuser.getUsername());
 			return user;
 		}
 		return new User();
@@ -66,13 +64,14 @@ public class UserService {
 	}
 
 	@PostMapping("/api/register")
-	public User register(@RequestBody User user, HttpSession session) {
+	public ResponseEntity<String> register(@RequestBody User user, HttpSession session) {
 		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
 		if (userRecord == null || userRecord.size() == 0) {
 			session.setAttribute(CURRENT_USER, user);
-			return userRepository.save(user);
+			return new ResponseEntity<String>(HttpStatus.OK); 
 		}
-		return new User();
+		
+		return new ResponseEntity<String>(HttpStatus.CONFLICT); 
 	}
 
 	@GetMapping("/api/users/{username}")
