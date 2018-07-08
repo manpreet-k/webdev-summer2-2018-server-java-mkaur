@@ -6,13 +6,14 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.models.User;
@@ -20,15 +21,12 @@ import webdev.repositories.UserRepository;
 
 @RestController
 public class UserService {
+	private static final String CURRENT_USER = "currentUser";
 	@Autowired
 	UserRepository userRepository;
 
 	@GetMapping("/api/user")
-	public Iterable<User> findAllUsers(@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name = "password", required = false) String password) {
-		if (username != null && password != null) {
-			return userRepository.findUserByCredentials(username, password);
-		}
+	public Iterable<User> findAllUsers() {
 		return userRepository.findAll();
 	}
 
@@ -37,7 +35,9 @@ public class UserService {
 		List<User> userRecord = (List<User>) userRepository.findUserByCredentials(user.getUsername(),
 				user.getPassword());
 		if (userRecord != null && userRecord.size() > 0) {
-			session.setAttribute("currentUser", user);
+			session.setAttribute(CURRENT_USER, user);
+			User newuser = (User) session.getAttribute(CURRENT_USER);
+			System.out.println("*****************" + newuser.getUsername());
 			return user;
 		}
 		return new User();
@@ -49,8 +49,9 @@ public class UserService {
 	}
 
 	@DeleteMapping("/api/user/{userId}")
-	public void deleteUser(@PathVariable Integer userId) {
+	public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
 		userRepository.deleteById(userId);
+		return new ResponseEntity<String>(HttpStatus.OK); 
 	}
 
 	@GetMapping("/api/user/{userId}")
@@ -68,28 +69,32 @@ public class UserService {
 	public User register(@RequestBody User user, HttpSession session) {
 		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
 		if (userRecord == null || userRecord.size() == 0) {
-			session.setAttribute("currentUser", user);
+			session.setAttribute(CURRENT_USER, user);
 			return userRepository.save(user);
 		}
 		return new User();
 	}
 
-	public Iterable<User> findUserByUsername(@RequestParam(name = "username") String username) {
+	@GetMapping("/api/users/{username}")
+	public Iterable<User> findUserByUsername(@PathVariable String username) {
 		return userRepository.findUserByUsername(username);
 	}
 
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user, HttpSession session) {
-		User currentUser = (User) session.getAttribute("currentUser");
-		if (currentUser.getUsername().equals(user.getUsername())) {
-			user.setId(currentUser.getId());
+		//User currentUser = (User) session.getAttribute(CURRENT_USER);
+		//if (currentUser.getUsername().equals(user.getUsername())) {
+		List<User> findUserByUsername = (List<User>)userRepository.findUserByUsername(user.getUsername());
+			user.setId(findUserByUsername.get(0).getId());
+			user.setPassword(findUserByUsername.get(0).getPassword());
 			return userRepository.save(user);
-		}
-		return new User();
+		//}
+		//return new User();
 	}
 
 	@PostMapping("/api/logout")
-	public void logout(HttpSession session) {
+	public ResponseEntity<String> logout(HttpSession session) {
 		session.invalidate();
+		return new ResponseEntity<String>(HttpStatus.OK); 
 	}
 }
