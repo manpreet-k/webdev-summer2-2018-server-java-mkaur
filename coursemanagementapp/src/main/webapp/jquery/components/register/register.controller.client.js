@@ -12,7 +12,8 @@
 		$registerBtn.click(register);
 	}
 	
-	function register() {
+	function register(e) {
+		e.preventDefault();
 		var usernameStr = $usernameFld.val();
 		var passwordStr = $passwordFld.val();
 		var user = {
