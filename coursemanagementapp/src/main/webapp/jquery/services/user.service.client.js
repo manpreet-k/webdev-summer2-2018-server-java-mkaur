@@ -8,14 +8,16 @@ function UserService() {
 	this.register = register;
 	this.updateProfile = updateProfile;
 	this.logout = logout;
-	this.loginUrl = '/api/login'
+	this.findUserByUsername = findUserByUsername;
+	this.loginUrl = '/api/login/'
 	this.userUrl = '/api/user';
+	this.usersUrl = '/api/users';
 	this.registerUrl = '/api/register';
 	this.profileUrl = '/api/profile';
 	this.logoutUrl = '/api/logout';
 	var self = this;
 
-	function login(user) {
+	function login(user, callback) {
 		var userObjStr = JSON.stringify(user);
 		return fetch(self.loginUrl, {
 			method : 'post',
@@ -23,6 +25,11 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			},
 			body : userObjStr
+		})
+		.then(function(response) {
+			return response.json();
+		}).then(function(data) {
+			callback(data);
 		});
 	}
 
@@ -34,7 +41,8 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			},
 			body : userObjStr
-		}).then(callback);
+		})
+		.then(callback);
 	}
 
 	function findAllUsers(callback) {
@@ -121,6 +129,16 @@ function UserService() {
 	function logout(callback) {
 		return fetch(self.logoutUrl, {
 			method : 'post',
+			headers : {
+				'Content-Type' : 'application/json'
+			}
+		})
+		.then(callback);
+	}
+	
+	function findUserByUsername(username, callback) {
+		return fetch(self.usersUrl + '/' + username, {
+			method : 'get',
 			headers : {
 				'Content-Type' : 'application/json'
 			}
