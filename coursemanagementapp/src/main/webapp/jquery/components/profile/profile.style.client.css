@@ -11,6 +11,7 @@
 .msg_success, .msg_error {
 	margin: 5px 0px;
 	padding: 5px;
+	border-radius: 5px;
 }
 
 .msg_success {
