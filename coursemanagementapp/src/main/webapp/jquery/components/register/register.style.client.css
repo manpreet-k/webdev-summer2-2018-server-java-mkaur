@@ -1,1 +1,12 @@
-@charset "ISO-8859-1";
+.msg_error {
+	color: red;
+	background-color: #FFD2D2;
+	margin: 5px 0px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.msg_error i {
+	margin: 5px 5px;
+	vertical-align: middle;
+}

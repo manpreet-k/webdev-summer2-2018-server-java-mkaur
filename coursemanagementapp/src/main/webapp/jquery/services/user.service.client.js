@@ -104,10 +104,9 @@ function UserService() {
 				'Content-Type' : 'application/json'
 			},
 			body : userObjStr
-		}).then(function(response) {
-			return response.json();
-		}).then(function(data) {
-			callback(data);
+		})
+		.then(function(response) {
+			callback(user, response);
 		});
 	}
 

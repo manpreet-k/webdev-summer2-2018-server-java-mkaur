@@ -18,18 +18,21 @@
 	<div class="container">
 		<h1>Sign Up</h1>
 		<form>
+			<div>
+				<div id="errorMsg" class="msg_error col-sm-12">
+					<i class="fa fa-times-circle"></i> <label id = "errorText"></label>
+				</div>
+			</div>
 			<div class="form-group row">
 				<label for="username" class="col-sm-2 col-form-label">
-					Username 
-				</label>
+					Username </label>
 				<div class="col-sm-10">
 					<input class="form-control" id="username" placeholder="Alice">
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="password" class="col-sm-2 col-form-label">
-					Password 
-				</label>
+					Password </label>
 				<div class="col-sm-10">
 					<input type="password" class="form-control wbdv-password-fld"
 						id="password" placeholder="123qwe#$%">
@@ -37,8 +40,7 @@
 			</div>
 			<div class="form-group row">
 				<label for="verifyPassword" class="col-sm-2 col-form-label">
-					Verify Password 
-				</label>
+					Verify Password </label>
 				<div class="col-sm-10">
 					<input type="password" class="form-control wbdv-password-fld"
 						id="verifyPassword" placeholder="123qwe#$%">
@@ -47,7 +49,8 @@
 			<div class="form-group row">
 				<label class="col-sm-2 col-form-label"></label>
 				<div class="col-sm-10">
-					<button id = "registerBtn" class="btn btn-primary btn-block">Sign up</button>
+					<button id="registerBtn" class="btn btn-primary btn-block">Sign
+						up</button>
 					<div class="row">
 						<div class="col-6">
 							<a href="../login/login.template.client.html">Login</a>
