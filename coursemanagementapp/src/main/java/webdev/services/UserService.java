@@ -89,14 +89,14 @@ public class UserService {
 
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user, HttpSession session) {
-		//User currentUser = (User) session.getAttribute(CURRENT_USER);
-		//if (currentUser.getUsername().equals(user.getUsername())) {
-		List<User> findUserByUsername = (List<User>)userRepository.findUserByUsername(user.getUsername());
-			user.setId(findUserByUsername.get(0).getId());
-			user.setPassword(findUserByUsername.get(0).getPassword());
-			return userRepository.save(user);
-		//}
-		//return new User();
+		User currentUser = (User) session.getAttribute(CURRENT_USER);
+		if (currentUser.getUsername().equals(user.getUsername())) {
+			user.setId(currentUser.getId());
+			user.setPassword(currentUser.getPassword());
+			currentUser.set(user);
+			return userRepository.save(currentUser);
+		}
+		return new User();
 	}
 
 	@PostMapping("/api/logout")

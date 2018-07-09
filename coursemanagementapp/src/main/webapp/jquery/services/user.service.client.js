@@ -24,7 +24,8 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			},
-			body : userObjStr
+			body : userObjStr,
+			'credentials':'include'
 		})
 		.then(function(response) {
 			return response.json();
@@ -103,7 +104,8 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			},
-			body : userObjStr
+			body : userObjStr,
+			'credentials':'include'
 		})
 		.then(function(response) {
 			callback(user, response);
@@ -117,7 +119,8 @@ function UserService() {
 			headers : {
 				'Content-Type' : 'application/json'
 			},
-			body : userObjStr
+			body : userObjStr,
+			'credentials':'include'
 		}).then(function(response) {
 			return response.json();
 		}).then(function(data) {
@@ -130,7 +133,8 @@ function UserService() {
 			method : 'post',
 			headers : {
 				'Content-Type' : 'application/json'
-			}
+			},
+			'credentials':'include'
 		})
 		.then(callback);
 	}
