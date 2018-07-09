@@ -59,8 +59,15 @@ public class UserService {
 
 	@PutMapping("/api/user/{userId}")
 	public User updateUser(@PathVariable Integer userId, @RequestBody User user) {
-		user.setId(userId);
-		return userRepository.save(user);
+		User existingUser = new User();
+		Optional<User> existingRecord = userRepository.findById(userId);
+		
+		if(existingRecord.isPresent()) {
+			existingUser = existingRecord.get();
+			existingUser.set(user);
+		}
+		
+		return userRepository.save(existingUser);
 	}
 
 	@PostMapping("/api/register")
@@ -68,6 +75,7 @@ public class UserService {
 		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
 		if (userRecord == null || userRecord.size() == 0) {
 			session.setAttribute(CURRENT_USER, user);
+			userRepository.save(user);
 			return new ResponseEntity<String>(HttpStatus.OK); 
 		}
 		

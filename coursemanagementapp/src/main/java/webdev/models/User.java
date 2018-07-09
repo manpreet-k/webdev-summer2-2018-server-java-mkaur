@@ -18,6 +18,33 @@ public class User {
 	private String role;
 	private Date dateOfBirth;
 
+	public User() {
+		super();
+	}
+
+	public User(String username, String password, String firstName, String lastName, String phone, String email,
+			String role, Date dateOfBirth) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.role = role;
+		this.dateOfBirth = dateOfBirth;
+	}
+	
+	public void set(User newUser) {
+		this.username = newUser.username != null ? newUser.username : this.username;
+		this.password = newUser.password != null ? newUser.password : this.password;
+		this.firstName = newUser.firstName != null ? newUser.firstName : this.firstName;
+		this.lastName = newUser.lastName != null ? newUser.lastName : this.lastName;
+		this.phone = newUser.phone != null ? newUser.phone : this.phone;
+		this.email = newUser.email != null ? newUser.email : this.email;
+		this.role = newUser.role != null ? newUser.role : this.role;
+		this.dateOfBirth = newUser.dateOfBirth != null ? newUser.dateOfBirth : this.dateOfBirth;
+	}
+
 	/**
 	 * @return the id
 	 */
