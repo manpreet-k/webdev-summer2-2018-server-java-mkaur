@@ -40,7 +40,7 @@
     	var lastNameStr = $lastNameFld.val();
     	var roleStr = $roleFld.val();
     	
-    	var user = new User(usernameStr, passwordStr, firstNameStr, lastNameStr, "", "", roleStr, "");
+    	var user = new User(usernameStr, passwordStr, firstNameStr, lastNameStr, null, null, roleStr, null);
     	userService.createUser(user, reloadCallback);
     }
     
@@ -60,7 +60,6 @@
     	$usernameFld
     		.val(user.username)
     		.attr("disabled", true);
-		$passwordFld.val(user.password);
 		$firstNameFld.val(user.firstName);	
 		$lastNameFld.val(user.lastName);	
 		$roleFld.val(user.role);	
@@ -76,12 +75,11 @@
     
     function updateUser() {
     	var usernameStr = $usernameFld.val();
-    	var passwordStr = $passwordFld.val();
     	var firstNameStr = $firstNameFld.val();
     	var lastNameStr = $lastNameFld.val();
     	var roleStr = $roleFld.val();
     	
-    	var user = new User(usernameStr, passwordStr, firstNameStr, lastNameStr, "", "", roleStr, "");
+    	var user = new User(usernameStr, null, firstNameStr, lastNameStr, null, null, roleStr, null);
     	
     	userService.updateUser(updateId, user, reloadCallback);
     }
