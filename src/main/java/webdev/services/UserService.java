@@ -112,6 +112,10 @@ public class UserService {
 	
 	@GetMapping("/api/sessionUser")
 	public User getSessionUser(HttpSession session) {
-		return (User) session.getAttribute(CURRENT_USER);
+		User user = (User) session.getAttribute(CURRENT_USER);
+		if(user == null)
+			user = new User();
+		
+		return user;
 	}
 }
