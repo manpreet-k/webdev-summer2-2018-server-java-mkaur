@@ -27,13 +27,12 @@
 		}
 		else{
 			$error.hide();
+			var user = {
+					username : usernameStr,
+					password : passwordStr,
+				}
+				return userService.register(user, validateRegister);
 		}
-		
-		var user = {
-			username : usernameStr,
-			password : passwordStr,
-		}
-		return userService.register(user, validateRegister);
 	}
 	
 	function validateRegister(user, response){
