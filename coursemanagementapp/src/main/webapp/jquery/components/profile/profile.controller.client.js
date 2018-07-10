@@ -2,10 +2,11 @@
 	var userService = new UserService();
 	var $success, $error;
 	var $username, $firstname, $lastname, $email, $phone, $role, $dob;
+	var currentUser = null;
 	$(main);
 
 	function main() {
-		var username = window.location.hash.substring(1);
+		//var username = window.location.hash.substring(1);
 		
 		$success = $('#successMsg');
 		$error = $('#errorMsg');
@@ -19,18 +20,20 @@
 
 		$('#logoutBtn').click(logout);
 		$('#updateBtn').click(updateProfile);
-		$username.val(username).prop('disabled', true);
+//		$username.val(username).prop('disabled', true);
+		$username.prop('disabled', true);
 		$error.hide();
 		$success.hide();
-		findUserByUsername(username);
+		loadUserData();
 	}
 	
-	function findUserByUsername(username) {
-    	userService.findUserByUsername(username, populateData);
+	function loadUserData() {
+    	userService.getUserData(populateData);
     }
     
-    function populateData(users) {
-    	var user = users[0];
+    function populateData(user) {
+    	currentUser = user;
+    	$username.val(user.username)
     	$firstName.val(user.firstName);
     	$lastName.val(user.lastName);
     	$phone.val(user.phone);
@@ -46,15 +49,15 @@
 
 	function updateProfile(e) {
 		e.preventDefault();
-		var user = new User($username.val(), 
-							null, 
-							$firstName.val(), 
-							$lastName.val(), 
-							$phone.val(),
-							$email.val(), 
-							$role.val(), 
-							$dob.val())
-		return userService.updateProfile(user, showUpdateMsg);
+
+		currentUser.firstName = $firstName.val();
+		currentUser.lastName = $lastName.val();
+		currentUser.phone = $phone.val();
+		currentUser.email = $email.val();
+		currentUser.role = $role.val();
+		currentUser.dob = $dob.val();
+		
+		return userService.updateProfile(currentUser, showUpdateMsg);
 	}
 	
 	function showUpdateMsg(user){
