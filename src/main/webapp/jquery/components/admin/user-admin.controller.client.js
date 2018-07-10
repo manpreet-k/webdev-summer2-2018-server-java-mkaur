@@ -110,7 +110,7 @@
     }
     
     function reloadCallback(){
-    	location.reload();
+    	findAllUsers();
     }
     
 })();
