@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import webdev.models.User;
@@ -26,7 +27,13 @@ public class UserService {
 	UserRepository userRepository;
 
 	@GetMapping("/api/user")
-	public Iterable<User> findAllUsers() {
+	public Iterable<User> findAllUsers(
+			@RequestParam(name="username", required=false) String username, 
+			@RequestParam(name="password", required=false) String password) {
+		if(username != null && password != null)
+			return userRepository.findUserByCredentials(username, password);
+		else if(username != null)
+			return userRepository.findUserByUsername(username);
 		return userRepository.findAll();
 	}
 
@@ -34,9 +41,9 @@ public class UserService {
 	public User login(@RequestBody User user, HttpSession session) {
 		List<User> userRecord = (List<User>) userRepository.findUserByCredentials(user.getUsername(),
 				user.getPassword());
-		if (userRecord != null && userRecord.size() > 0) {
-			session.setAttribute(CURRENT_USER, user);
-			return user;
+		if (userRecord != null && userRecord.size() == 1) {
+			session.setAttribute(CURRENT_USER, userRecord.get(0));
+			return userRecord.get(0);
 		}
 		return new User();
 	}
@@ -82,17 +89,15 @@ public class UserService {
 		return new ResponseEntity<String>(HttpStatus.CONFLICT); 
 	}
 
-	@GetMapping("/api/users/{username}")
-	public Iterable<User> findUserByUsername(@PathVariable String username) {
-		return userRepository.findUserByUsername(username);
-	}
+//	@GetMapping("/api/user/{username}")
+//	public Iterable<User> findUserByUsername(@PathVariable String username) {
+//		return userRepository.findUserByUsername(username);
+//	}
 
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user, HttpSession session) {
 		User currentUser = (User) session.getAttribute(CURRENT_USER);
 		if (currentUser.getUsername().equals(user.getUsername())) {
-			user.setId(currentUser.getId());
-			user.setPassword(currentUser.getPassword());
 			currentUser.set(user);
 			return userRepository.save(currentUser);
 		}
@@ -103,5 +108,10 @@ public class UserService {
 	public ResponseEntity<String> logout(HttpSession session) {
 		session.invalidate();
 		return new ResponseEntity<String>(HttpStatus.OK); 
+	}
+	
+	@GetMapping("/api/sessionUser")
+	public User getSessionUser(HttpSession session) {
+		return (User) session.getAttribute(CURRENT_USER);
 	}
 }

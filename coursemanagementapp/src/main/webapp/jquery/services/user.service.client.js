@@ -9,12 +9,13 @@ function UserService() {
 	this.updateProfile = updateProfile;
 	this.logout = logout;
 	this.findUserByUsername = findUserByUsername;
+	this.getUserData = getUserData;
 	this.loginUrl = '/api/login/'
 	this.userUrl = '/api/user';
-	this.usersUrl = '/api/users';
 	this.registerUrl = '/api/register';
 	this.profileUrl = '/api/profile';
 	this.logoutUrl = '/api/logout';
+	this.sessionUserUrl = '/api/sessionUser';
 	var self = this;
 
 	function login(user, callback) {
@@ -139,12 +140,26 @@ function UserService() {
 		.then(callback);
 	}
 	
-	function findUserByUsername(username, callback) {
-		return fetch(self.usersUrl + '/' + username, {
+	function findUserByUsername(username, callback) {		
+		return fetch(self.userUrl + '/' + username, {
 			method : 'get',
 			headers : {
 				'Content-Type' : 'application/json'
 			}
+		}).then(function(response) {
+			return response.json();
+		}).then(function(data) {
+			callback(data);
+		});
+	}
+	
+	function getUserData(callback) {		
+		return fetch(self.sessionUserUrl, {
+			method : 'get',
+			headers : {
+				'Content-Type' : 'application/json'
+			},
+			'credentials':'include'
 		}).then(function(response) {
 			return response.json();
 		}).then(function(data) {
