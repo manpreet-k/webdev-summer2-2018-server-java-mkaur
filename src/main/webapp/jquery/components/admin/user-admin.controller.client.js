@@ -62,7 +62,10 @@
     		.attr("disabled", true);
 		$firstNameFld.val(user.firstName);	
 		$lastNameFld.val(user.lastName);	
-		$roleFld.val(user.role);	
+		$roleFld.val(user.role);
+		$passwordFld
+			.val(user.password)
+			.attr("disabled", true);
     }
     
     function deleteUser() {    	    	
@@ -111,6 +114,15 @@
     
     function reloadCallback(){
     	findAllUsers();
+    	resetFields();
+    }
+    
+    function resetFields(){
+    	$usernameFld.val("");
+    	$firstNameFld.val("");
+    	$lastNameFld.val("");
+    	$roleFld.val("");
+    	$roleFld.attr("disabled", false);
     }
     
 })();
