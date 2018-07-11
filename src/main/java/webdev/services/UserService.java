@@ -50,7 +50,11 @@ public class UserService {
 
 	@PostMapping("/api/user")
 	public User createUser(@RequestBody User user) {
-		return userRepository.save(user);
+		List<User> userRecord = (List<User>) userRepository.findUserByUsername(user.getUsername());
+		if (userRecord == null || userRecord.size() == 0) {
+			return userRepository.save(user);
+		}
+		return new User();
 	}
 
 	@DeleteMapping("/api/user/{userId}")
@@ -112,6 +116,10 @@ public class UserService {
 	
 	@GetMapping("/api/sessionUser")
 	public User getSessionUser(HttpSession session) {
-		return (User) session.getAttribute(CURRENT_USER);
+		User user = (User) session.getAttribute(CURRENT_USER);
+		if(user == null)
+			user = new User();
+		
+		return user;
 	}
 }

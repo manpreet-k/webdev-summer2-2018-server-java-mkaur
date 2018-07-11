@@ -46,7 +46,7 @@
 		}
 		else{
 			$error.hide();
-			window.location.href='../profile/profile.template.client.html#' + user.username;
+			window.location.href='../profile/profile.template.client.html';
 		}
 	}
 })();
