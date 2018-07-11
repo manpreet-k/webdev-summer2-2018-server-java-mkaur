@@ -38,7 +38,10 @@
     	$lastName.val(user.lastName);
     	$phone.val(user.phone);
     	$email.val(user.email);	
-    	$dob.val(user.dateOfBirth);	
+    	//var d = new Date(user.dateOfBirth);	
+    	//$dob.val(d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate());
+    	var date2 = new Date().toISOString().substr(0, 10).replace('T', ' ');
+    	$dob.val(date2);
 		$role.val(user.role);	
     }
 
@@ -55,7 +58,7 @@
 		currentUser.phone = $phone.val();
 		currentUser.email = $email.val();
 		currentUser.role = $role.val();
-		currentUser.dob = $dob.val();
+		currentUser.dateOfBirth = $dob.val();
 		
 		return userService.updateProfile(currentUser, showUpdateMsg);
 	}
