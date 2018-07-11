@@ -40,7 +40,7 @@
     	$email.val(user.email);	
     	//var d = new Date(user.dateOfBirth);	
     	//$dob.val(d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate());
-    	var date2 = new Date().toISOString().substr(0, 10).replace('T', ' ');
+    	var date2 = new Date(user.dateOfBirth).toISOString().substr(0, 10).replace('T', ' ');
     	$dob.val(date2);
 		$role.val(user.role);	
     }
