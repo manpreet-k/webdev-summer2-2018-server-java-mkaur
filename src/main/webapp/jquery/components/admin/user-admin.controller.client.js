@@ -1,7 +1,7 @@
 (function () {
     var $usernameFld, $passwordFld;
     var $removeBtn, $editBtn, $createBtn;
-    var $updateBtn, $searchBtn;
+    var $updateBtn;
     var $firstNameFld, $lastNameFld;
     var $roleFld;
     var $userRowTemplate, $tbody;
@@ -21,12 +21,10 @@
 							.removeClass('wbdv-hidden'); 
 		$createBtn = $('.wbdv-create');
 		$updateBtn = $('.wbdv-update');
-		$searchBtn = $('.wbdv-search');
-		
+				
 		$createBtn.click(createUser);
 		$updateBtn.click(updateUser);
-		$searchBtn.click(findUserById);
-		
+				
 		findAllUsers();
 		
 		$tbody.on('click', '.wbdv-remove', deleteUser);
@@ -118,11 +116,15 @@
     }
     
     function resetFields(){
-    	$usernameFld.val("");
     	$firstNameFld.val("");
     	$lastNameFld.val("");
     	$roleFld.val("");
-    	$roleFld.attr("disabled", false);
+    	$usernameFld
+    		.val("")
+    		.attr("disabled", false);
+    	$passwordFld
+    		.val("")
+    		.attr("disabled", false);
     }
     
 })();

@@ -6,7 +6,6 @@
 	$(main);
 
 	function main() {
-		//var username = window.location.hash.substring(1);
 		
 		$success = $('#successMsg');
 		$error = $('#errorMsg');
@@ -20,7 +19,6 @@
 
 		$('#logoutBtn').click(logout);
 		$('#updateBtn').click(updateProfile);
-//		$username.val(username).prop('disabled', true);
 		$username.prop('disabled', true);
 		$error.hide();
 		$success.hide();
@@ -38,8 +36,6 @@
     	$lastName.val(user.lastName);
     	$phone.val(user.phone);
     	$email.val(user.email);	
-    	//var d = new Date(user.dateOfBirth);	
-    	//$dob.val(d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate());
     	var date2 = new Date(user.dateOfBirth).toISOString().substr(0, 10).replace('T', ' ');
     	$dob.val(date2);
 		$role.val(user.role);	
