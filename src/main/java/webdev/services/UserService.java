@@ -93,11 +93,6 @@ public class UserService {
 		return new ResponseEntity<String>(HttpStatus.CONFLICT); 
 	}
 
-//	@GetMapping("/api/user/{username}")
-//	public Iterable<User> findUserByUsername(@PathVariable String username) {
-//		return userRepository.findUserByUsername(username);
-//	}
-
 	@PutMapping("/api/profile")
 	public User updateProfile(@RequestBody User user, HttpSession session) {
 		User currentUser = (User) session.getAttribute(CURRENT_USER);
