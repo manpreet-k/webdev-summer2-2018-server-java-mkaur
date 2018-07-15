@@ -23,8 +23,8 @@ public class Lesson {
 		this.module = module;
 	}
 
-	public void set(Lesson newModule) {
-		this.title = newModule.title != null ? newModule.title : this.title;
+	public void set(Lesson newLesson) {
+		this.title = newLesson.title != null ? newLesson.title : this.title;
 	}
 
 	/**
