@@ -9,7 +9,7 @@ import webdev.models.Module;
 
 @Repository
 public interface ModuleRepository extends CrudRepository<Module, Integer> {
-	@Query("SELECT m FROM Module m WHERE m.id=:id AND m.course=:courseId")
+	@Query("SELECT m FROM Module m WHERE m.id=:id AND m.course.id=:courseId")
 	Module 
 		findModuleByIdAndCourseId
 			(@Param("id") Integer id, 
