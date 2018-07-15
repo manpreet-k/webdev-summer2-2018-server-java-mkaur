@@ -1,6 +1,8 @@
 package webdev.models;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,8 @@ public class Course {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
+	@OneToMany(mappedBy = "course")
+	private List<Module> modules;
 
 	public Course() {
 		super();
@@ -88,6 +92,20 @@ public class Course {
 	 */
 	public void setModified(Date modified) {
 		this.modified = modified;
+	}
+
+	/**
+	 * @return the modules
+	 */
+	public List<Module> getModules() {
+		return modules;
+	}
+
+	/**
+	 * @param modules the modules to set
+	 */
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
 	}
 
 }
