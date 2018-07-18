@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +30,13 @@ public class ModuleService {
 	@Autowired
 	CourseRepository courseRepository;
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/module")
 	public Iterable<Module> findAllModules() {
 		return moduleRepository.findAll();
 	}
 
+	@CrossOrigin(origins = "*")
 	@PostMapping("/api/course/{courseId}/module")
 	public Module createModule(@PathVariable Integer courseId, @RequestBody Module module) {
 		Optional<Course> data = courseRepository.findById(courseId);
@@ -45,17 +48,20 @@ public class ModuleService {
 		return new Module();
 	}
 
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/api/module/{id}")
 	public ResponseEntity<String> deleteModule(@PathVariable Integer id) {
 		moduleRepository.deleteById(id);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/module/{id}")
 	public Optional<Module> findModuleById(@PathVariable Integer id) {
 		return moduleRepository.findById(id);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/course/{cid}/module")
 	public List<Module> findAllModulesForCourse(@PathVariable Integer cid) {
 		List<Module> modules = new ArrayList<>();
@@ -67,6 +73,7 @@ public class ModuleService {
 		return modules;
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping("/api/module/{id}")
 	public Module updateModule(@PathVariable Integer id, @RequestBody Module module) {
 		Module newModule = new Module();
