@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +30,13 @@ public class TopicService {
 	@Autowired
 	LessonRepository lessonRepository;
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/topic")
 	public Iterable<Topic> findAllTopics() {
 		return topicRepository.findAll();
 	}
 
+	@CrossOrigin(origins = "*")
 	@PostMapping("/api/course/{cid}/module/{mid}/lesson/{lid}/topic")
 	public Topic createLesson(@PathVariable Integer cid, @PathVariable Integer mid, @PathVariable Integer lid,
 			@RequestBody Topic topic) {
@@ -46,17 +49,20 @@ public class TopicService {
 		return new Topic();
 	}
 
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/api/topic/{id}")
 	public ResponseEntity<String> deleteTopic(@PathVariable Integer id) {
 		topicRepository.deleteById(id);
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/topic/{id}")
 	public Optional<Topic> findTopicById(@PathVariable Integer id) {
 		return topicRepository.findById(id);
 	}
 
+	@CrossOrigin(origins = "*")
 	@GetMapping("/api/course/{cid}/module/{mid}/lesson/{lid}/topic")
 	public List<Topic> findAllTopicsForLesson(@PathVariable Integer cid, @PathVariable Integer mid,
 			@PathVariable Integer lid) {
@@ -68,6 +74,7 @@ public class TopicService {
 		return topics;
 	}
 
+	@CrossOrigin(origins = "*")
 	@PutMapping("/api/topic/{id}")
 	public Topic updateTopic(@PathVariable Integer id, @RequestBody Topic topic) {
 		Topic newTopic = new Topic();
