@@ -69,9 +69,11 @@ public class LessonService {
 	@GetMapping("/api/course/{cid}/module/{mid}/lesson")
 	public List<Lesson> findAllLessonssForModule(@PathVariable Integer cid, @PathVariable Integer mid) {
 		List<Lesson> lessons = new ArrayList<>();
-		Module module = moduleRepository.findModuleByIdAndCourseId(cid, mid);
-		if(module != null) {
-			lessons = module.getLessons();
+		//Module module = moduleRepository.findModuleByIdAndCourseId(cid, mid);
+		Optional<Module> existingModule = moduleRepository.findById(mid);
+		if(existingModule.isPresent()) {
+			Module module = existingModule.get();
+			lessons = module .getLessons();
 		}		
 		return lessons;
 	}
