@@ -15,7 +15,7 @@ public class Course {
 	private Date created;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
-	@OneToMany(mappedBy = "course")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "course")
 	private List<Module> modules;
 
 	public Course() {

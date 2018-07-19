@@ -16,7 +16,7 @@ public class Lesson {
 	@JsonIgnore
 	private Module module;
 	
-	@OneToMany(mappedBy = "lesson")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "lesson")
 	private List<Topic> topics;
 
 	public Lesson() {
