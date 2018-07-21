@@ -6,6 +6,9 @@ Java server for the Course Management Application
 
 https://webdev-summer2-2018-mkaur.herokuapp.com/
 
+# Created by
+Manpreet Kaur
+
 ## Specifications mentioned in Assignment 1 covered
 
 ## Bonus
