@@ -17,6 +17,7 @@ public class Course {
 	private Date modified;
 	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "course")
 	private List<Module> modules;
+	private String owner;
 
 	public Course() {
 		super();
@@ -108,4 +109,17 @@ public class Course {
 		this.modules = modules;
 	}
 
+	/**
+	 * @return the owner
+	 */
+	public String getOwner() {
+		return owner;
+	}
+
+	/**
+	 * @param owner the owner to set
+	 */
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 }
