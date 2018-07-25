@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import webdev.utils.ListType;
+
 @Entity
 public class Widget {
 	@Id
@@ -16,6 +18,14 @@ public class Widget {
 	private String style;
 	private String width;
 	private String height;
+	private int size;
+	private String src;
+	private String href;
+	private String listItems;
+	
+	@Enumerated(EnumType.STRING)
+	private ListType listType;
+	
 	@ManyToOne
 	@JsonIgnore
 	private Topic topic;
@@ -24,7 +34,8 @@ public class Widget {
 		super();
 	}
 
-	public Widget(String name, int position, String text, String className, String style, String width, String height,
+	public Widget(String name, int position, String text, String className, String style, String width, String height, 
+			int size, String src, String href, String listItems, ListType listType,
 			Topic topic) {
 		this.name = name;
 		this.position = position;
@@ -34,6 +45,11 @@ public class Widget {
 		this.width = width;
 		this.height = height;
 		this.topic = topic;
+		this.size = size;
+		this.src = src;
+		this.href = href;
+		this.listItems = listItems;
+		this.listType = listType;
 	}
 
 	public void set(Widget newWidget) {
@@ -44,7 +60,6 @@ public class Widget {
 		this.style = newWidget.style != null ? newWidget.style : this.style;
 		this.width = newWidget.width != null ? newWidget.width : this.width;
 		this.height = newWidget.height != null ? newWidget.height : this.height;
-		this.name = newWidget.name != null ? newWidget.name : this.name;
 	}
 
 	/**
@@ -165,6 +180,90 @@ public class Widget {
 	 */
 	public void setTopic(Topic topic) {
 		this.topic = topic;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public String getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	/**
+	 * @return the src
+	 */
+	public String getSrc() {
+		return src;
+	}
+
+	/**
+	 * @param src the src to set
+	 */
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	/**
+	 * @return the href
+	 */
+	public String getHref() {
+		return href;
+	}
+
+	/**
+	 * @param href the href to set
+	 */
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	/**
+	 * @return the listItems
+	 */
+	public String getListItems() {
+		return listItems;
+	}
+
+	/**
+	 * @param listItems the listItems to set
+	 */
+	public void setListItems(String listItems) {
+		this.listItems = listItems;
+	}
+
+	/**
+	 * @return the listType
+	 */
+	public ListType getListType() {
+		return listType;
+	}
+
+	/**
+	 * @param listType the listType to set
+	 */
+	public void setListType(ListType listType) {
+		this.listType = listType;
 	}
 
 }
