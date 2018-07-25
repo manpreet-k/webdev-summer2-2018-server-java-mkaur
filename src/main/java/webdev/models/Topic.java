@@ -1,5 +1,7 @@
 package webdev.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +15,9 @@ public class Topic {
 	@ManyToOne
 	@JsonIgnore
 	private Lesson lesson;
+	
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy = "topic")
+	private List<Widget> widgets;
 
 	public Topic() {
 		super();
@@ -70,4 +75,19 @@ public class Topic {
 	public void setLesson(Lesson lesson) {
 		this.lesson = lesson;
 	}
+
+	/**
+	 * @return the widgets
+	 */
+	public List<Widget> getWidgets() {
+		return widgets;
+	}
+
+	/**
+	 * @param widgets the widgets to set
+	 */
+	public void setWidgets(List<Widget> widgets) {
+		this.widgets = widgets;
+	}
+	
 }
