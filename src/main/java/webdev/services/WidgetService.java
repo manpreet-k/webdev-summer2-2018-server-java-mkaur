@@ -88,4 +88,23 @@ public class WidgetService {
 
 		return new Widget();
 	}
+	
+	@CrossOrigin(origins = "*")
+	@PostMapping("/api/topic/{topicId}/widgets")
+	public List<Widget> saveAllWidget(@PathVariable Integer topicId,
+			@RequestBody List<Widget> widgets) {
+		Optional<Topic> existingTopic = topicRepository.findById(topicId);
+		List<Widget> createdWidgets = new ArrayList<>();
+
+		if (existingTopic.isPresent()) {
+			Topic topic = existingTopic.get();
+			widgetRepository.deleteAllWidgetsForTopic(topic.getId());
+			
+			for(Widget widget: widgets) {
+				widget.setTopic(topic);
+				createdWidgets.add(widgetRepository.save(widget));
+			}
+		}
+		return createdWidgets;
+	}
 }

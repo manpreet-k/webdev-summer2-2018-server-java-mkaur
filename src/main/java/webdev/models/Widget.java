@@ -14,7 +14,7 @@ public class Widget {
 	private String name;
 	private int position;
 	private String text;
-	private String className;
+	private String classname;
 	private String style;
 	private String width;
 	private String height;
@@ -40,7 +40,7 @@ public class Widget {
 		this.name = name;
 		this.position = position;
 		this.text = text;
-		this.className = className;
+		this.classname = className;
 		this.style = style;
 		this.width = width;
 		this.height = height;
@@ -56,7 +56,7 @@ public class Widget {
 		this.name = newWidget.name != null ? newWidget.name : this.name;
 		this.position = newWidget.position != 0 ? newWidget.position : this.position;
 		this.text = newWidget.text != null ? newWidget.text : this.text;
-		this.className = newWidget.className != null ? newWidget.className : this.className;
+		this.classname = newWidget.classname != null ? newWidget.classname : this.classname;
 		this.style = newWidget.style != null ? newWidget.style : this.style;
 		this.width = newWidget.width != null ? newWidget.width : this.width;
 		this.height = newWidget.height != null ? newWidget.height : this.height;
@@ -125,16 +125,16 @@ public class Widget {
 	/**
 	 * @return the className
 	 */
-	public String getClassName() {
-		return className;
+	public String getClassname() {
+		return classname;
 	}
 
 	/**
 	 * @param className
 	 *            the className to set
 	 */
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassname(String className) {
+		this.classname = className;
 	}
 
 	/**
